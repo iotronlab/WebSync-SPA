@@ -6,11 +6,13 @@ export default {
    ** Headers of the page
    */
   head: {
-    titleTemplate: process.env.npm_package_name +
+    titleTemplate:
+      process.env.npm_package_name +
       " - " +
       process.env.npm_package_description,
     title: process.env.npm_package_name || "",
-    meta: [{
+    meta: [
+      {
         charset: "utf-8"
       },
       {
@@ -22,15 +24,21 @@ export default {
         name: "description",
         content: process.env.npm_package_description || ""
       }
+      // {
+      //    name: "csrf-token",
+      //   content: "{{ csrf_token() }}"
+      //  }
     ],
-    link: [{
+    link: [
+      {
         rel: "icon",
         type: "image/x-icon",
         href: "/icon.png"
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
+        href:
+          "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
       }
     ]
   },
@@ -62,8 +70,8 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: "http://api.iotronlabs.com/public/api",
-    // baseURL: 'http://localhost:8000',
+    //baseURL: "http://api.iotronlabs.com/public/api",
+    baseURL: "http://15.206.140.87/api",
     proxyHeaders: false,
     credentials: false,
     proxy: false,
@@ -106,12 +114,12 @@ export default {
             propertyName: "token"
           },
           user: {
-            url: '/auth/me',
-            method: 'get',
-            propertyName: 'data'
+            url: "/auth/me",
+            method: "get",
+            propertyName: "data"
           },
           logout: {
-            url: '/auth/out'
+            url: "/auth/out"
           }
         },
         tokenRequired: true,
@@ -123,7 +131,8 @@ export default {
         scope: ["public_profile", "email", "user_birthday"]
       },
       google: {
-        client_id: "971122924020-j0754ojm02r59dt421ig97l6682mhr69.apps.googleusercontent.com"
+        client_id:
+          "971122924020-j0754ojm02r59dt421ig97l6682mhr69.apps.googleusercontent.com"
       }
       // 'laravel.passport': {
       // 	url: '/login',
@@ -137,7 +146,15 @@ export default {
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
-  buildModules: ["@nuxtjs/vuetify"],
+  buildModules: ["@nuxtjs/vuetify", "@nuxtjs/laravel-echo"],
+  echo: {
+    /* module options */
+    broadcaster: "pusher",
+    key: "WEBSYNC",
+    wsHost: "15.206.140.87",
+    wsPort: 6001,
+    disableStats: true
+  },
 
   vuetify: {
     theme: {

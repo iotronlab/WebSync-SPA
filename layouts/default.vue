@@ -47,7 +47,12 @@ export default {
   mounted() {
     console.log("mounted");
     this.initialize();
+    this.$echo.channel('home')
+      .listen('StatusUpdate', (e) => {
+          console.log(e.message);
+      });
   },
+   
   methods: {
     ...mapActions(["callUpdateNavMenu"]),
     async initialize() {
