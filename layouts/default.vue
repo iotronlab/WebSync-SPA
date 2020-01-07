@@ -23,7 +23,16 @@
 
     <v-app-bar app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>Application</v-toolbar-title>
+      <h2 class="headline">WebSync</h2>
+      <v-spacer></v-spacer>
+      <v-badge color="green" overlap left>
+        <template v-slot:badge>
+          <span v-if="list.length > 0">{{ list.length }}</span>
+        </template>
+        <v-btn icon small>
+          <v-icon id="notifyicon" large>mdi-bell-ring-outline</v-icon>
+        </v-btn>
+      </v-badge>
     </v-app-bar>
     <v-content>
       <v-container>
@@ -36,7 +45,7 @@
 
 <script>
 import Footer from "@/components/core/Footer";
-import { mapActions, mapMutations } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   components: {
     Footer
@@ -47,20 +56,67 @@ export default {
   mounted() {
     console.log("mounted");
     this.initialize();
-    this.$echo.channel('home')
-      .listen('StatusUpdate', (e) => {
-          console.log(e.message);
-      });
   },
-   
+
   methods: {
-    ...mapActions(["callUpdateNavMenu"]),
+    ...mapActions(["initiateDevice", "updateDevice"]),
     async initialize() {
-      await this.callUpdateNavMenu();
+      await this.initiateDevice();
+      await this.updateDevice();
+    }
+  },
+  computed: {
+    ...mapGetters({
+      list: "updatedDeviceList"
+    })
+  },
+  watch: {
+    list(list) {
+      document.getElementById("notifyicon").classList.remove("notify");
+      void document.getElementById("notifyicon").offsetWidth;
+      document.getElementById("notifyicon").classList.add("notify");
+      //    setTimeout(
+      //    () => document.getElementById("notifyicon").classList.remove("notify"),
+      //      1
+      //    );
+      console.log("list updated");
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
+.notify {
+  animation: bell 1s ease-out;
+  transform-origin: center top;
+}
+
+@keyframes bell {
+  0% {
+    transform: rotate(35deg);
+  }
+  12.5% {
+    transform: rotate(-30deg);
+  }
+  25% {
+    transform: rotate(25deg);
+  }
+  37.5% {
+    transform: rotate(-20deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  62.5% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
 </style>
+
+

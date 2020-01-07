@@ -6,13 +6,11 @@ export default {
    ** Headers of the page
    */
   head: {
-    titleTemplate:
-      process.env.npm_package_name +
+    titleTemplate: process.env.npm_package_name +
       " - " +
       process.env.npm_package_description,
     title: process.env.npm_package_name || "",
-    meta: [
-      {
+    meta: [{
         charset: "utf-8"
       },
       {
@@ -29,16 +27,14 @@ export default {
       //   content: "{{ csrf_token() }}"
       //  }
     ],
-    link: [
-      {
+    link: [{
         rel: "icon",
         type: "image/x-icon",
         href: "/icon.png"
       },
       {
         rel: "stylesheet",
-        href:
-          "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
+        href: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
       }
     ]
   },
@@ -131,8 +127,7 @@ export default {
         scope: ["public_profile", "email", "user_birthday"]
       },
       google: {
-        client_id:
-          "971122924020-j0754ojm02r59dt421ig97l6682mhr69.apps.googleusercontent.com"
+        client_id: "971122924020-j0754ojm02r59dt421ig97l6682mhr69.apps.googleusercontent.com"
       }
       // 'laravel.passport': {
       // 	url: '/login',

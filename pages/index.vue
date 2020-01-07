@@ -4,7 +4,6 @@
       <v-container>
         <v-row>
           <v-col>
-            {{devices}}
             <v-switch
               v-for="device in devices"
               :key="device.id"
@@ -17,6 +16,12 @@
         </v-row>
       </v-container>
     </v-card>
+    <v-sheet>
+      <v-card-title>Live Notifications</v-card-title>
+      {{updatedDeviceList.length}}
+      <UpdatedDeviceList />
+      {{updatedDeviceList}}
+    </v-sheet>
   </v-app>
 </template>
 
@@ -24,22 +29,18 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
+import UpdatedDeviceList from "@/components/LiveUpdate/UpdatedDeviceList.vue";
+
 export default {
-  props: {
-    device: {
-      required: true,
-      type: Object
-    }
+  components: {
+    UpdatedDeviceList
   },
 
-  data() {
-    return {
-      livestatus: ""
-    };
-  },
   computed: {
     ...mapGetters({
-      devices: "devices"
+      devices: "devices",
+      updatedDevice: "updatedDevice",
+      updatedDeviceList: "updatedDeviceList"
     })
   },
   methods: {
