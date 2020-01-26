@@ -29,8 +29,8 @@
         <template v-slot:badge>
           <span v-if="list.length > 0">{{ list.length }}</span>
         </template>
-        <v-btn icon small>
-          <v-icon id="notifyicon" large>mdi-bell-ring-outline</v-icon>
+        <v-btn small fab>
+          <v-icon id="notifyicon">mdi-bell-ring-outline</v-icon>
         </v-btn>
       </v-badge>
     </v-app-bar>
@@ -118,5 +118,3 @@ export default {
   }
 }
 </style>
-
-

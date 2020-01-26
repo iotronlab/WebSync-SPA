@@ -1,7 +1,15 @@
 <template>
-  <v-container fluid>
-    <v-row v-for="updatedDevice in updatedDeviceList" :key="updatedDevice.id">
-      <UpdatedDevice :device="updatedDevice" />
+  <v-container class="pa-0">
+    <v-row no-gutters>
+      <v-col
+        v-for="updatedDevice in updatedDeviceList"
+        :key="updatedDevice.id"
+        cols="12"
+        md="4"
+        class="pa-1"
+      >
+        <UpdatedDevice :device="updatedDevice" />
+      </v-col>
     </v-row>
   </v-container>
 </template>
